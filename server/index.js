@@ -1,9 +1,20 @@
 import express from 'express';
-import dotenv from "dotenv";
 import router from "./routers/router.js";
+import BookSchema from './model/bookSchema.js';
 
 const app = express();
 const PORT = 3000;
+
+BookSchema.create({
+    id: 1,
+    name: "The Hobbit",
+    author: "J.R.R. Tolkien",
+    genre: "Fantasy",
+    isbn: "978-0547928227"
+})
+
+const book = await BookSchema.findAll();
+console.log(book);
 
 app.use("/", router);
 

@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../db/db";
+import sequelize from "../db/db.js";
 
-const BookSchema = sequelize.define("pet", {
+const BookSchema = sequelize.define("books", {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -20,7 +20,7 @@ const BookSchema = sequelize.define("pet", {
         allowNull: false,
     },
     isbn: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
     }
 });

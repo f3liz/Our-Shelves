@@ -1,6 +1,7 @@
 import express from 'express';
 import router from "./routers/router.js";
 import BookSchema from './model/bookSchema.js';
+import cors from 'cors';
 
 const app = express();
 const PORT = 3000;
@@ -15,6 +16,8 @@ BookSchema.create({
 
 const book = await BookSchema.findAll();
 console.log(book);
+
+app.use(cors())
 
 app.use("/", router);
 

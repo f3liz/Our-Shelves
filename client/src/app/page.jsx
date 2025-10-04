@@ -14,9 +14,7 @@ export default function HomePage() {
           Track the books you’re reading and your progress in each book.
         </Typography>
 
-        <Link href="/books" style={{ textDecoration: "none" }}>
-          <Button variant="contained" size="large">View Books</Button>
-        </Link>
+        <Button variant="contained" href="/books" size="large">View Books</Button>
       </Box>
     </Container>
   );

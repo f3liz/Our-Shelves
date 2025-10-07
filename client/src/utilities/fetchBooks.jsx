@@ -11,7 +11,8 @@ export default function FetchBooks() {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const res = await fetch("http://localhost:3000/books"); // Call backend /books route
+        const API = process.env.NEXT_PUBLIC_API_BASE_URL;
+        const res = await fetch(`${API}/books`); // Call backend /books route
         const json = await res.json();                          // Parse returned JSON
         const rows = Array.isArray(json) ? json : json?.data || []; // Get the data out from the data object passed in the JSON response
         setBooks(rows);                                          // Store data in books state

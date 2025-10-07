@@ -15,6 +15,7 @@ export default function HomePage() {
         </Typography>
 
         <Button variant="contained" href="/books" size="large">View Books</Button>
+        <Button variant="contained" href="/books/addBook" size="large">Add a Book</Button>
       </Box>
     </Container>
   );

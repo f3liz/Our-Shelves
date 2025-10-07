@@ -1,0 +1,94 @@
+"use client";
+
+import React from "react";
+import { useState } from "react";
+
+const Page = () => {
+  const [form, setForm] = useState({ name: "", author: "", genre: "", isbn: "" });
+
+  const [message, setMessage] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value} = e.target;
+    setForm(prev => ({ ...prev, [name]: value }));
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+        const res = await fetch('http://localhost:3000/books', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(form)
+        });
+        
+        const data = await res.json();
+        console.log(data);
+
+        if (res.ok) {
+            setMessage('Book added!');
+            setForm({ name: '', author: '', genre: '', isbn: ''});
+        } else {
+            setMessage('Failed');
+        }
+    } catch (error) {
+        console.error('Error adding book: ', error);
+    }
+  };
+
+  return (
+    <div>
+      <h2>Add a Book</h2>
+      <form onSubmit={handleSubmit} data-cy="bookAdd-form">
+      <label>
+          <input
+            name="name"
+            type="text"
+            placeholder="Book Name"
+            required
+            onChange={handleChange}
+            value={form.name}
+          />
+        </label>
+        <br />
+        <label>
+          <input
+            name="author"
+            type="text"
+            placeholder="Author"
+            required
+            onChange={handleChange}
+            value={form.author}
+          />
+        </label>
+        <br />
+        <label>
+          <input
+            name="genre"
+            type="text"
+            placeholder="Genre"
+            required
+            onChange={handleChange}
+            value={form.genre}
+          />
+        </label>
+        <br />
+        <label>
+          <input
+            name="isbn"
+            type="text"
+            placeholder="ISBN"
+            required
+            onChange={handleChange}
+            value={form.isbn}
+          />
+        </label>
+        <br />
+        <button type="submit">Add book</button>
+      </form>
+    </div>
+  );
+};
+
+export default Page;

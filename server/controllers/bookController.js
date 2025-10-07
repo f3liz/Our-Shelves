@@ -7,3 +7,13 @@ export const books = async (req, res) => {
         data
     });
 }
+
+export const addBook = async (req, res) => {
+    const book = req.body;
+    const bookAdded = await dataLayer.addBook(book);
+
+    res.status(201).json({
+        message: "success",
+        data: bookAdded
+    });
+}

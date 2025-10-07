@@ -8,7 +8,7 @@ const router = express.Router();
 //     res.send("Hello World");
 // });
 router.get("/books", controller.books);
-// router.post("/books",)
+router.post("/books", controller.addBook);
 
 
 export default router;

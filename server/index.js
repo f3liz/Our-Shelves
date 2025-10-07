@@ -17,7 +17,9 @@ BookSchema.create({
 const book = await BookSchema.findAll();
 console.log(book);
 
-app.use(cors())
+app.use(cors());
+
+app.use(express.json());
 
 app.use("/", router);
 

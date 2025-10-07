@@ -1,109 +1,11 @@
 {
   "version": 4,
-  "routes": {
-    "/_not-found": {
-      "initialStatus": 404,
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "next-action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/_not-found",
-      "dataRoute": "/_not-found.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "next-action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/",
-      "dataRoute": "/index.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/books/addBook": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "next-action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/books/addBook",
-      "dataRoute": "/books/addBook.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/books": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "next-action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/books",
-      "dataRoute": "/books.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    }
-  },
+  "routes": {},
   "dynamicRoutes": {},
   "notFoundRoutes": [],
   "preview": {
-    "previewModeId": "b0ebd6f23b28094a06d17721a09d4387",
-    "previewModeSigningKey": "b9f2ffe511809369a1148b0b01e24c42b4fe99a41b72ad65e0a9a21609b74ea1",
-    "previewModeEncryptionKey": "56c5ab23c4d27ef3f72f8eca099888e68115feb2cbc2a57b2be0a71bae4f7da5"
+    "previewModeId": "7ad2a47365d2fc190649cdf4d2c30f95",
+    "previewModeSigningKey": "6b39633606510f2eadc6f5190ae0b99665261f510c5bbc7a4d0c5a7cb4eca540",
+    "previewModeEncryptionKey": "d83e5696e5cc7967a8082adf2b78e0a192571f531b27526a81c0f065c99021bb"
   }
 }

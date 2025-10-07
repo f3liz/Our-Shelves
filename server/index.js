@@ -12,7 +12,7 @@ const HOST = "0.0.0.0";
 const book = await BookSchema.findAll();
 console.log(book);
 
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

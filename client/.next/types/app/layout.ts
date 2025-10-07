@@ -1,4 +1,4 @@
-// File: /Users/felix/Documents/SDEV372/Our-Shelves/client/src/app/layout.jsx
+// File: /Users/alex/SynologyDrive/Fall quarter 2025/SDEV 372/Our-Shelves/client/src/app/layout.jsx
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

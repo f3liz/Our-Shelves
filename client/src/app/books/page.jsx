@@ -1,55 +1,58 @@
 "use client";
 
-import {
-  Container,
-  Typography,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody
-} from "@mui/material";
+import CenterCard from "@/components/CenterCard";
+import styles from "@/styles/ui.module.css";
 import FetchBooks from "@/utilities/fetchBooks";
 
 export default function BooksPage() {
   const { books, loading, error } = FetchBooks();
 
-  if (loading) return <Typography sx={{ p: 2 }}>Loading…</Typography>;
-  if (error)   return <Typography sx={{ p: 2 }} color="error.main">{error}</Typography>;
+  if (loading) {
+    return (
+      <CenterCard title="Books">
+        <p>Loading…</p>
+      </CenterCard>
+    );
+  }
+
+  if (error) {
+    return (
+      <CenterCard title="Books">
+        <p className={styles.errorText}>{error}</p>
+      </CenterCard>
+    );
+  }
 
   return (
-    <Container sx={{ py: 4 }}>
-      <Typography variant="h5" gutterBottom>Books</Typography>
-
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell>Title</TableCell>
-            <TableCell>Author</TableCell>
-            <TableCell>Genre</TableCell>
-            <TableCell>ISBN</TableCell>
-          </TableRow>
-        </TableHead>
-
-        <TableBody>
-          {books.map((b, i) => (
-            <TableRow key={b.id ?? i}>
-              <TableCell>{b.id ?? "-"}</TableCell>
-              <TableCell>{b.name ?? "-"}</TableCell>
-              <TableCell>{b.author ?? "-"}</TableCell>
-              <TableCell>{b.genre ?? "-"}</TableCell>
-              <TableCell>{b.isbn ?? "-"}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-
-      {books.length === 0 && (
-        <Typography color="text.secondary" sx={{ mt: 2 }}>
-          No books found.
-        </Typography>
+    <CenterCard title="Books">
+      {books.length === 0 ? (
+        <p className="muted">No books found.</p>
+      ) : (
+        <div className={styles.tableWrap}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Genre</th>
+                <th>ISBN</th>
+              </tr>
+            </thead>
+            <tbody>
+              {books.map((b, i) => (
+                <tr key={b.id ?? i}>
+                  <td>{b.id ?? "-"}</td>
+                  <td>{b.name ?? "-"}</td>
+                  <td>{b.author ?? "-"}</td>
+                  <td>{b.genre ?? "-"}</td>
+                  <td>{b.isbn ?? "-"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
-    </Container>
+    </CenterCard>
   );
 }

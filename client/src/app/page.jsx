@@ -1,22 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { Container, Box, Typography, Button } from "@mui/material";
+import CenterCard from "@/components/CenterCard";
+import styles from "@/styles/ui.module.css";
 
 export default function HomePage() {
   return (
-    <Container maxWidth="md">
-      <Box sx={{ py: 8 }}>
-        <Typography variant="h3" gutterBottom>
-          OurShelves
-        </Typography>
-        <Typography color="text.secondary" sx={{ mb: 3 }}>
-          Track the books you’re reading and your progress in each book.
-        </Typography>
-
-        <Button variant="contained" href="/books" size="large">View Books</Button>
-        <Button variant="contained" href="/books/addBook" size="large">Add a Book</Button>
-      </Box>
-    </Container>
+    <CenterCard
+      title="Welcome to OurShelves"
+      subtitle="Track the books you’re reading and your progress in each one."
+      actions={
+        <div className={styles.actionsRow}>
+          <Link href="/books" className={styles.btnPrimary}>View Books</Link>
+          <Link href="/books/addBook" className={styles.btnGhost}>Add a Book</Link>
+        </div>
+      }
+    >
+    </CenterCard>
   );
 }

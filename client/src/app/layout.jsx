@@ -1,18 +1,22 @@
-"use client";
+import "../styles/globals.css";
+import NavBar from "@/components/NavBar";
 
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-
-const theme = createTheme();
+export const metadata = {
+  title: "OurShelves",
+  description: "Track the books you’re reading and progress in each book.",
+  icons: {
+    icon: "/Favicon.png"
+  },
+};
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body style={{ margin: 0 }}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
+      <body>
+        <NavBar />
+        <main className="page">
           {children}
-        </ThemeProvider>
+        </main>
       </body>
     </html>
   );

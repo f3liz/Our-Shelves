@@ -1,58 +1,58 @@
 "use client";
 
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import CenterCard from "@/components/CenterCard";
+import styles from "@/styles/ui.module.css";
 
-const Page = () => {
+export default function Page() {
   const [form, setForm] = useState({ name: "", author: "", genre: "", isbn: "" });
-
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
-    const { name, value} = e.target;
+    const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-        const res = await fetch('http://localhost:3000/books', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(form)
-        });
-        
-        const data = await res.json();
-        console.log(data);
+      const res = await fetch("http://localhost:3000/books", { 
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
 
-        if (res.ok) {
-            setMessage('Book added!');
-            setForm({ name: '', author: '', genre: '', isbn: ''});
-        } else {
-            setMessage('Failed');
-        }
-    } catch (error) {
-        console.error('Error adding book: ', error);
+      const data = await res.json();
+      if (res.ok) {
+        setMessage("Book added!");
+        setForm({ name: "", author: "", genre: "", isbn: "" });
+      } else {
+        setMessage(data?.error || "Failed to add book.");
+      }
+    } catch (err) {
+      console.error("Error adding book:", err);
+      setMessage("Network error.");
     }
   };
 
   return (
-    <div>
-      <h2>Add a Book</h2>
-      <form onSubmit={handleSubmit} data-cy="bookAdd-form">
-      <label>
+    <CenterCard title="Add a Book">
+      <form onSubmit={handleSubmit} data-cy="bookAdd-form" className={styles.form}>
+        <label>
+          <span>Title</span>
           <input
             name="name"
             type="text"
-            placeholder="Book Name"
+            placeholder="Book title"
             required
             onChange={handleChange}
             value={form.name}
           />
         </label>
-        <br />
+
         <label>
+          <span>Author</span>
           <input
             name="author"
             type="text"
@@ -62,8 +62,9 @@ const Page = () => {
             value={form.author}
           />
         </label>
-        <br />
+
         <label>
+          <span>Genre</span>
           <input
             name="genre"
             type="text"
@@ -73,8 +74,9 @@ const Page = () => {
             value={form.genre}
           />
         </label>
-        <br />
+
         <label>
+          <span>ISBN</span>
           <input
             name="isbn"
             type="text"
@@ -84,11 +86,13 @@ const Page = () => {
             value={form.isbn}
           />
         </label>
-        <br />
-        <button type="submit">Add book</button>
-      </form>
-    </div>
-  );
-};
 
-export default Page;
+        <div className={styles.actionsRow}>
+          <button type="submit" className={styles.btnPrimary}>Add Book</button>
+        </div>
+
+        {message && <p className={styles.successText}>{message}</p>}
+      </form>
+    </CenterCard>
+  );
+}

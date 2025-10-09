@@ -47,7 +47,7 @@ module.exports = {
       name: "Our-Shelves-Frontend",
       cwd: "./Our-Shelves/client",
       script: "npm",
-      args: "run dev",
+      args: "run start",
       env: {
         NODE_ENV: "production",
         PORT: 3001,

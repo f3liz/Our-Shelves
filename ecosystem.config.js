@@ -31,7 +31,9 @@ module.exports = {
       script: "node",
       args: "index.js",
       env: {
-        NODE_ENV: "production"
+        NODE_ENV: "production",
+        PORT: 3000,
+        HOST: "0.0.0.0"
       },
       autorestart: true,
       watch: false,
@@ -47,8 +49,9 @@ module.exports = {
       script: "npm",
       args: "run dev",
       env: {
-        NODE_ENV: "development",
-        PORT: 3001
+        NODE_ENV: "production",
+        PORT: 3001,
+        HOST: "0.0.0.0"
       }
     }
   ]

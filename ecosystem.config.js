@@ -27,7 +27,7 @@ module.exports = {
   apps: [
     {
       name: "Our-Shelves-Backend",
-      cwd: "./server",
+      cwd: "./Our-Shelves/server",
       script: "node",
       args: "index.js",
       env: {
@@ -43,7 +43,7 @@ module.exports = {
     },
     {
       name: "Our-Shelves-Frontend",
-      cwd: "./client",
+      cwd: "./Our-Shelves/client",
       script: "npm",
       args: "run dev",
       env: {

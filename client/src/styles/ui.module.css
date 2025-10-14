@@ -1,5 +1,5 @@
 /* Buttons */
-.btnPrimary{
+.btnPrimary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -12,11 +12,21 @@
   color: var(--accent-ink);
   transition: transform .02s ease, box-shadow .2s ease, filter .2s ease;
 }
-.btnPrimary:hover{ filter: brightness(1.05); }
-.btnPrimary:active{ transform: translateY(1px); }
-.btnPrimary:focus-visible{ box-shadow: var(--ring); outline: none; }
 
-.btnGhost{
+.btnPrimary:hover {
+  filter: brightness(1.05);
+}
+
+.btnPrimary:active {
+  transform: translateY(1px);
+}
+
+.btnPrimary:focus-visible {
+  box-shadow: var(--ring);
+  outline: none;
+}
+
+.btnGhost {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -24,37 +34,47 @@
   padding: .65rem 1rem;
   font-weight: 700;
   border-radius: 12px;
-  border: 1px solid rgba(15,23,42,0.08);
+  border: 1px solid rgba(15, 23, 42, 0.08);
   background: #fff;
   color: var(--text);
   transition: transform .02s ease, box-shadow .2s ease, background .2s ease;
 }
-.btnGhost:hover{ background: rgba(2,6,23,0.04); }
-.btnGhost:active{ transform: translateY(1px); }
-.btnGhost:focus-visible{ box-shadow: var(--ring); outline: none; }
 
-.actionsRow{
+.btnGhost:hover {
+  background: rgba(2, 6, 23, 0.04);
+}
+
+.btnGhost:active {
+  transform: translateY(1px);
+}
+
+.btnGhost:focus-visible {
+  box-shadow: var(--ring);
+  outline: none;
+}
+
+.actionsRow {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
 /* Table */
-.tableWrap{
+.tableWrap {
   width: 100%;
   overflow: auto;
   border-radius: 12px;
-  border: 1px solid rgba(15,23,42,0.08);
+  border: 1px solid rgba(15, 23, 42, 0.08);
 }
 
-.table{
+.table {
   width: 100%;
   border-collapse: collapse;
   min-width: 560px;
   background: #fff;
 }
 
-.table thead th{
+.table thead th {
   text-align: left;
   font-weight: 700;
   font-size: .9rem;
@@ -63,46 +83,115 @@
   background: rgba(2, 6, 23, 0.03);
 }
 
-.table tbody td{
+.table tbody td {
   padding: 12px 14px;
-  border-top: 1px solid rgba(15,23,42,0.06);
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
 }
 
-.table tbody tr:hover{
-  background: rgba(2,6,23,0.02);
+.table tbody tr:hover {
+  background: rgba(2, 6, 23, 0.02);
 }
 
 /* Form */
-.form{
+.form {
   display: grid;
   gap: 14px;
   max-width: 560px;
 }
 
-.form label{
+.form label {
   display: grid;
   gap: 6px;
 }
 
-.form label span{
+.form label span {
   font-weight: 600;
   color: var(--text);
 }
 
-.form input{
+.form input {
   width: 100%;
   padding: .65rem .8rem;
   border-radius: 10px;
-  border: 1px solid rgba(15,23,42,0.15);
+  border: 1px solid rgba(15, 23, 42, 0.15);
   background: #fff;
   outline: none;
   transition: box-shadow .2s ease, border-color .2s ease;
 }
 
-.form input:focus{
-  border-color: rgba(37,99,235,.5);
+.form input:focus {
+  border-color: rgba(37, 99, 235, .5);
   box-shadow: var(--ring);
 }
 
-.successText{ color: #0f766e; font-weight: 600; }
-.errorText{ color: #b91c1c; font-weight: 600; }
+.successText {
+  color: #0f766e;
+  font-weight: 600;
+}
+
+.errorText {
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+.statusSuccess {
+  background-color: #e6ffe6;
+  color: #155724;
+  border: 1px solid #b6e0b6;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 500;
+  animation: fadeIn 0.3s ease;
+}
+
+.statusError {
+  background-color: #ffe6e6;
+  color: #a71d2a;
+  border: 1px solid #f5b5b5;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 500;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.actionButton {
+  background-color: #0070f3;
+  /* primary blue */
+  color: white;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.actionButton:hover {
+  background-color: #005ad1;
+  /* darker on hover */
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+.actionButton:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}

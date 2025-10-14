@@ -10,12 +10,16 @@ export default function UpdateBookPage() {
   const { id } = useParams();
   const router = useRouter();
   const { book, loading, error } = FetchBookById(id);
+
   const [formData, setFormData] = useState({
     name: "",
     author: "",
     genre: "",
     isbn: ""
   });
+
+  const [status, setStatus] = useState(""); // holds success or error text
+  const [statusType, setStatusType] = useState(""); // "success" or "error"
 
   // Sync fetched book into formData when loaded
   if (book && formData.name === "" && !loading) {
@@ -44,11 +48,17 @@ export default function UpdateBookPage() {
 
       if (!res.ok) throw new Error("Update failed");
 
-      alert("Book updated successfully!");
-      router.push("/");
+      setStatus("Book updated successfully!");
+      setStatusType("success");
+
+      // Give the message time to show, then redirect
+      setTimeout(() => {
+        router.push("/books");
+      }, 1200);
     } catch (err) {
-      alert("Failed to update book");
       console.error(err);
+      setStatus("Failed to update book.");
+      setStatusType("error");
     }
   };
 
@@ -70,6 +80,19 @@ export default function UpdateBookPage() {
 
   return (
     <CenterCard title={`Update: ${formData.name || "Book"}`}>
+      {/* Inline success/error message */}
+      {status && (
+        <p
+          className={
+            statusType === "success"
+              ? styles.statusSuccess
+              : styles.statusError
+          }
+        >
+          {status}
+        </p>
+      )}
+
       <form className={styles.form} onSubmit={handleSubmit}>
         <label>
           Name:

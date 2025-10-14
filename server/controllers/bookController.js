@@ -8,6 +8,30 @@ export const books = async (req, res) => {
     });
 }
 
+export const getBookById = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const book = await dataLayer.getBookById(id);
+  
+      if (book) {
+        res.status(200).json({
+          message: "success",
+          data: book
+        });
+      } else {
+        res.status(404).json({
+          message: "not found",
+          data: null
+        });
+      }
+    } catch (error) {
+      res.status(500).json({
+        message: "error fetching book",
+        error: error.message
+      });
+    }
+  };  
+
 export const addBook = async (req, res) => {
     const book = req.body;
     const bookAdded = await dataLayer.addBook(book);

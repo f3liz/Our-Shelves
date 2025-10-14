@@ -3,9 +3,11 @@
 import CenterCard from "@/components/CenterCard";
 import styles from "@/styles/ui.module.css";
 import FetchBooks from "@/utilities/fetchBooks";
+import { useRouter } from "next/navigation";
 
 export default function BooksPage() {
   const { books, loading, error } = FetchBooks();
+  const router = useRouter();
 
   if (loading) {
     return (
@@ -37,6 +39,7 @@ export default function BooksPage() {
                 <th>Author</th>
                 <th>Genre</th>
                 <th>ISBN</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -50,7 +53,7 @@ export default function BooksPage() {
                   <td>
                     <button
                       className={styles.actionButton}
-                      onClick={() => window.location.href = `/updateBook/${b.id}`}
+                      onClick={() => router.push(`/books/updateBook/${b.id}`)}
                     >
                       Update
                     </button>

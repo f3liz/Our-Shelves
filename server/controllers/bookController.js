@@ -17,3 +17,20 @@ export const addBook = async (req, res) => {
         data: bookAdded
     });
 }
+
+export const updateBook = async (req, res) => {
+    const updatedBook = req.body;
+    const [ savedBook ] = await dataLayer.updateBook(updatedBook);
+
+    if(savedBook) {
+        res.status(200).json({
+            message: "success",
+            data: savedBook
+        })
+    } else {
+        res.status(404).json({
+            message: "failed",
+            data: null
+        })
+    }
+}

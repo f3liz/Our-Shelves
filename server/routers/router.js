@@ -9,6 +9,7 @@ const router = express.Router();
 // });
 router.get("/books", controller.books);
 router.post("/books", controller.addBook);
+router.put("/books", controller.updateBook);
 
 
 export default router;

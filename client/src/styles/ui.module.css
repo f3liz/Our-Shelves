@@ -171,27 +171,29 @@
 }
 
 .actionButton {
-  background-color: #0070f3;
-  /* primary blue */
-  color: white;
-  padding: 6px 14px;
-  border: none;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  font-weight: 700;
+  border-radius: 12px;
+  border: 1px solid rgba(16, 185, 129, 0.25); /* subtle green border */
+  background: #10b9811a; /* light minty green background */
+  color: #047857; /* darker emerald text */
+  transition: transform 0.02s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
 .actionButton:hover {
-  background-color: #005ad1;
-  /* darker on hover */
-  transform: translateY(-1px);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+  background: #10b98133; /* slightly stronger green tint on hover */
+  filter: brightness(1.05);
 }
 
 .actionButton:active {
-  transform: translateY(0);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  transform: translateY(1px);
+}
+
+.actionButton:focus-visible {
+  box-shadow: var(--ring);
+  outline: none;
 }

@@ -47,6 +47,14 @@ export default function BooksPage() {
                   <td>{b.author ?? "-"}</td>
                   <td>{b.genre ?? "-"}</td>
                   <td>{b.isbn ?? "-"}</td>
+                  <td>
+                    <button
+                      className={styles.actionButton}
+                      onClick={() => window.location.href = `/updateBook/${b.id}`}
+                    >
+                      Update
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

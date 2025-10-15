@@ -6,8 +6,24 @@ import FetchBooks from "@/utilities/fetchBooks";
 import { useRouter } from "next/navigation";
 
 export default function BooksPage() {
-  const { books, loading, error } = FetchBooks();
+  const { books, loading, error, refetch } = FetchBooks();
   const router = useRouter();
+
+  const handleDelete = async (id) => {
+    const confirmed = window.confirm("Are you sure you want to delete this book?");
+    if (!confirmed) return;
+
+    try {
+      const API = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const res = await fetch(`${API}/books/${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error("Delete failed");
+
+      await refetch(); // Re-fetch the updated list immediately
+    } catch (err) {
+      console.error("Failed to delete book:", err);
+    }
+  };
+
 
   if (loading) {
     return (
@@ -50,12 +66,18 @@ export default function BooksPage() {
                   <td>{b.author ?? "-"}</td>
                   <td>{b.genre ?? "-"}</td>
                   <td>{b.isbn ?? "-"}</td>
-                  <td>
+                  <td className={styles.actionsRow}>
                     <button
-                      className={styles.actionButton}
+                      className={styles.tableBtn}
                       onClick={() => router.push(`/books/updateBook/${b.id}`)}
                     >
                       Update
+                    </button>
+                    <button
+                      className={`${styles.tableBtn} ${styles.tableBtnDelete}`}
+                      onClick={() => handleDelete(b.id)}
+                    >
+                      Delete
                     </button>
                   </td>
                 </tr>

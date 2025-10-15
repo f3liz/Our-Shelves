@@ -130,7 +130,7 @@ export default function UpdateBookPage() {
             required
           />
         </label>
-        <button type="submit" className={styles.actionButton}>
+        <button type="submit" className={styles.btnPrimary}>
           Save Changes
         </button>
       </form>

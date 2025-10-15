@@ -8,7 +8,8 @@ const router = express.Router();
 //     res.send("Hello World");
 // });
 router.get("/books", controller.books);
+router.get("/books/:id", controller.getBookById);
 router.post("/books", controller.addBook);
-
+router.put("/books", controller.updateBook);
 
 export default router;

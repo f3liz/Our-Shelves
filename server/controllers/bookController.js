@@ -58,3 +58,18 @@ export const updateBook = async (req, res) => {
         })
     }
 }
+
+export const deleteBook = async (req, res) => {
+  const id = req.params.id;
+  const result = await dataLayer.deleteBook(id);
+
+  if(result) {
+    res.status(200).json({
+      message: "success"
+    })
+  } else {
+    res.status(404).json({
+      message: "failed - book not found"
+    })
+  }
+}

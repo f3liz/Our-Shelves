@@ -66,15 +66,15 @@ export default function BooksPage() {
                   <td>{b.author ?? "-"}</td>
                   <td>{b.genre ?? "-"}</td>
                   <td>{b.isbn ?? "-"}</td>
-                  <td>
+                  <td className={styles.actionsRow}>
                     <button
-                      className={styles.actionButton}
+                      className={styles.tableBtn}
                       onClick={() => router.push(`/books/updateBook/${b.id}`)}
                     >
                       Update
                     </button>
                     <button
-                      className={`${styles.actionButton} ${styles.btnDelete}`}
+                      className={`${styles.tableBtn} ${styles.tableBtnDelete}`}
                       onClick={() => handleDelete(b.id)}
                     >
                       Delete

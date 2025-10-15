@@ -21,3 +21,10 @@ export const updateBook = async (book) => {
     })
 }
 // D - Delete
+export const deleteBook = async (book) => {
+    return await BookSchema.destroy({
+        where: {
+            id: id
+        }
+    })
+}

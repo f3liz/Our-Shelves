@@ -59,7 +59,7 @@ export const updateBook = async (req, res) => {
     }
 }
 
-export const deleteBook = async (req, res) => {
+export const deleteBooks = async (req, res) => {
   const id = req.params.id;
   const result = await dataLayer.deleteBook(id);
 

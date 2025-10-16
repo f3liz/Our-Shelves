@@ -1,0 +1,128 @@
+:root {
+  --bg: #f4ede3;
+  --surface: #f0e4d3;
+  --text: #2b1d18;
+  --muted: #7d645a;
+  --accent: #7b2f2f;
+  --accent-ink: #fffaf5;
+
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(43, 29, 24, 0.08);
+  --ring: 0 0 0 3px rgba(123,47,47,.25);
+}
+
+*{ box-sizing: border-box; }
+html, body { height:100%; }
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #e9f0ff 0%, transparent 60%),
+    radial-gradient(1000px 600px at 110% -20%, #e8fff6 0%, transparent 60%),
+    var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a{ color: inherit; text-decoration: none; }
+
+/* Page layout */
+.page{
+  padding-top: 72px; /* space for navbar */
+  padding-left: 16px;
+  padding-right: 16px;
+  min-height: 100dvh;
+}
+
+/* Navbar */
+.navbar{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(8px);
+  background: rgba(240, 228, 211, 0.9);
+  border-bottom: 1px solid rgba(43,29,24,0.1);
+}
+
+.nav-inner{
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand{
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+
+.nav-links{
+  display: flex;
+  gap: 14px;
+}
+
+.nav-links a{
+  padding: 8px 10px;
+  border-radius: 10px;
+  color: var(--muted);
+}
+
+.nav-links a:hover,
+.nav-links a[aria-current="page"]{
+  color: var(--text);
+  background: rgba(2, 6, 23, 0.04);
+}
+
+/* Centered Card */
+.center-wrap{
+  display: grid;
+  place-items: start center;
+  padding: 32px 0 64px;
+}
+
+.card{
+  width: 100%;
+  max-width: 1000px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(43,29,24,0.15);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.card-header{
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 22px;
+  border-bottom: 1px solid rgba(15,23,42,0.06);
+  background:
+    linear-gradient(180deg, rgba(37,99,235,0.05), rgba(255,255,255,0));
+}
+
+.card-title{
+  margin: 0 0 6px 0;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.card-subtitle{
+  margin: 0;
+  color: var(--muted);
+}
+
+.card-actions{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.card-body{
+  padding: 22px;
+}

@@ -1,79 +1,236 @@
-**Project Name: Our Shelves**  
-**Partners: Augy Markham, Rebecca Riffle**
+# Our Shelves
 
-# Our Shelves 
+**Project Name:** Our Shelves  
+**Original Creators:** Augy Markham, Rebecca Riffle  
+**Partners:** Alexander Ruban, Felix Chen  
 
-## Quick Overview 
-### What is it?  
-Reading tracking app with light social features.   
-### Who would use it? What value would it provide?**
+---
 
-* Audience: Readers who write in the margins and leave sticky notes, but want to do it digitally with their friends.  
-* Easy to share
+## Overview
 
-### What’s the MVP?
+**Our Shelves** is a book-tracking web application that allows users to manage their personal reading lists.  
+Users can add, view, update, and delete books from their collection, making it simple to track progress and stay organized.
 
-- User login  
-- Users can add books to their shelf  
-- Users can add notes to their books  
-- User can update bookmark  
-- Users can filter view of notes:  
-  - By person (just them/friends)  
+---
+
+## Current MVP Features
+
+- Full-stack architecture using **Next.js (React)**, **Node.js (Express)**, and **MySQL**
+- Add new books and details to the database
+- View all books in a clean, sortable table view
+- Update book information (e.g., title, author, status)
+- Delete books once finished reading
+
+---
+
+## Planned Features (Future Roadmap)
+
+- User accounts with authentication and login
+- Personal and shared notes for each book
+- Bookmarks to track reading progress
+- Interactive bookshelf UI
+- Custom filtering for notes:
+  - By user (self/friends)
   - By page number
+- Friend requests and shared reading lists
+- Custom shelves (e.g., Sci-Fi, Nonfiction, Favorites)
+- User personalization (themes, colors, shelf decorations)
+- Social features like comments and book recommendations
 
-![][image1]  
-## Project Overview 
+---
 
-Our Shelves is a low-stress space to visually track books you are reading and leave “sticky notes” in each book with page numbers, tracking page numbers with a bookmark. Friends can view your shelf. If you are reading the same book, you can share notes.
+## Environment Variables
 
-Example: John Doe is on page 57 of The Great Gatsby and writes “I can’t believe he said that\!”, Jane Doe is on page 130 and writes “Oh no\!” John can see that Jane left a note on page 130 and can choose to read it or wait until he’s also on/past page 130.)
+### Frontend (`.env.local`)
+Create a `.env.local` file in the `client` folder based on the provided `example.env.local`:
 
-Problem Statement:   
-Readers like to track what they are reading and have social features without using an app that’s entirely social-oriented. Our app captures the experience of reading a book with a friend.
+```
+NEXT_PUBLIC_API_BASE_URL=http://<YOUR_VM_IP or localhost>:3000
+```
 
-Target Users:   
-People who like to track their reading and want to share some of their reading with some people (not just public).
+### Backend (`.env`)
+Create a `.env` file in the `server` folder based on the provided `example.env`:
 
-## Feature Breakdown  
-MVP Features: Core CRUD functionality that could be built in the first sprint or two
+```
+SERVER_PORT=3000
 
-* User login  
-* Users can add books to their shelf  
-* Users can add notes to their books  
-* User can update bookmark  
-* Users can filter view of notes:  
-  * By person (just them/friends)  
-  * By page number
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=ourshelves
+DB_USER=DevelopmentUserOrDeploymentUser
+DB_PASSWORD=UserPassword
+```
 
-Extended Features: Additional functionality for later development phases
+---
 
-* Users can add friends, who have to accept invite  
-* Users can remove friends  
-* User can add shelves and organize books so they display based on shelf   
-* Highly customizeable interface\! Modify color scheme / add plants, etc.
+## Development & Deployment
 
-## Data Model Planning  
-Core Entities: 
+### Local Development Setup
 
-* Users  
-* Shelves (example: Sci-Fi shelf)  
-* Books (example: Frankenstein by Mary Shelley)  
-* Bookmark (example: p. 33\)  
-* Notes (example: p 142 “”)
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/f3liz/Our-Shelves.git
+   cd Our-Shelves
+   ```
 
-Key Relationships: How do these entities connect?
+2. **Install Dependencies**
+   ```bash
+   cd server
+   npm install
+   cd ../client
+   npm install
+   ```
 
-- Each user has a shelf  
-- Each user has other users as “friends”  
-- Each shelf has books  
-- Each book has a bookmark  
-- Each book has notes
+3. **Set Up Environment Files**  
+   Create `.env` files for both frontend and backend (see above).
 
-CRUD Operations: Specify what users can Create, Read, Update, and Delete  
-Create books  
-Create \+ Update bookmarks  
-CRUD Notes
+4. **Create a MySQL Database**
+   ```sql
+   CREATE DATABASE ourshelves;
+   ```
+   Ensure credentials match those in your backend `.env` file.
 
-## User Experience   
-User Flows: How do users accomplish key tasks?  
-Wireframes/Sketches: Basic layout ideas for main screens
+5. **Start Both Servers**
+   From the project root:
+   ```bash
+   npm run dev
+   ```
+
+---
+
+### Deployment (VM / Production)
+
+1. **Run the Setup Script**
+   ```bash
+   bash setup.sh
+   ```
+
+2. **Navigate into the Project**
+   ```bash
+   cd Our-Shelves
+   ```
+
+3. **Create Environment Files**  
+   The setup script creates MySQL users and credentials in `ourshelves_mysql_credentials`.  
+   Use those to populate your backend `.env` file.
+
+4. **Rebuild Frontend**
+   ```bash
+   cd client
+   npm run build
+   ```
+
+5. **Start with PM2**
+   ```bash
+   pm2 list
+   pm2 start ecosystem.config.js
+   pm2 save
+   pm2 list
+   ```
+
+---
+
+## Running the Application
+
+### Locally
+```bash
+npm run dev
+```
+
+### On the VM
+1. **Rebuild Frontend**
+   ```bash
+   cd client
+   npm run build
+   ```
+
+2. **Restart Services**
+   ```bash
+   cd ..
+   pm2 start ecosystem.config.js
+   pm2 save
+   pm2 list
+   ```
+
+---
+
+## Architecture Overview
+
+Our Shelves uses a standard three-tier architecture:
+
+- **Frontend (Client):** Built with Next.js and React to provide a responsive user interface.  
+- **Backend (Server):** Powered by Node.js and Express, serving RESTful API endpoints for data handling.  
+- **Database Layer:** Uses MySQL to store book records, managed through the Sequelize ORM.  
+- **Deployment:** PM2 is used to manage both frontend and backend processes in production for stability and automatic restarts.  
+
+This structure keeps the code organized and supports smooth communication between the client, server, and database layers.
+
+---
+
+## Folder Structure
+
+```
+Our-Shelves/
+├── client/               # Next.js frontend
+│   ├── src/              # Source folder for frontend
+│   │   ├── components/   # Reusable UI components
+│   │   ├── app/          # Next.js routes
+│   │   ├── styles/       # Global and modular CSS
+│   │   ├── utilities/    # Utility functions for pages
+│   └── public/           # Static assets
+│
+├── server/               # Express backend
+│   ├── model/            # Sequelize models (BookSchema)
+│   ├── routers/          # API router
+│   ├── controller/       # Business logic
+│   ├── db/               # Database creation and functions
+│   └── index.js          # Entry point
+│
+├── setup.sh              # VM deployment setup script
+├── ecosystem.config.js   # PM2 configuration
+└── README.md             # Project documentation
+```
+
+---
+
+## API Endpoints
+
+| Method | Endpoint        | Description              |
+|--------|-----------------|--------------------------|
+| GET    | `/books`        | Fetch all books          |
+| GET    | `/books/:id`    | Fetch a single book      |
+| POST   | `/books`        | Add a new book           |
+| PUT    | `/books/:id`    | Update a book            |
+| DELETE | `/books/:id`    | Delete a book            |
+
+---
+
+## Dependencies
+
+### Frontend
+- `next`
+- `react`
+- `react-dom`
+
+### Backend
+- `express`
+- `sequelize`
+- `mysql2`
+- `cors`
+- `dotenv`
+
+### Root
+- `pm2`
+
+---
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) (v18+)
+- [npm](https://www.npmjs.com/)
+- [MySQL](https://www.mysql.com/)
+- [Git](https://git-scm.com/)
+- [PM2](https://pm2.keymetrics.io/)
+- [OpenSSL](https://www.openssl.org/)
+
+---

@@ -1,116 +1,236 @@
-# Our Shelves  
+# Our Shelves
 
 **Project Name:** Our Shelves  
 **Original Creators:** Augy Markham, Rebecca Riffle  
-**Partners:** Alexander Ruban, Felix Chen
+**Partners:** Alexander Ruban, Felix Chen  
 
 ---
 
-## Quick Overview  
+## Overview
 
-### What is it?  
-Reading tracking app with light social features.  
-
-### Who would use it? What value would it provide?  
-- **Audience:** Readers who write in the margins and leave sticky notes, but want to do it digitally with their friends.  
-- **Value:** Makes sharing reading experiences easy and social without being overwhelming.  
-
-### What’s the MVP?  
-- User login  
-- Users can add books to their shelf  
-- Users can add notes to their books  
-- Users can update bookmark  
-- Users can filter view of notes:  
-  - By person (just them/friends)  
-  - By page number  
+**Our Shelves** is a book-tracking web application that allows users to manage their personal reading lists.  
+Users can add, view, update, and delete books from their collection, making it simple to track progress and stay organized.
 
 ---
 
-## Project Overview  
+## Current MVP Features
 
-Our Shelves is a low-stress space to visually track books you are reading and leave “sticky notes” in each book with page numbers, tracking progress with a bookmark. Friends can view your shelf and, if they are reading the same book, share notes.  
-
-**Example:**  
-John Doe is on page 57 of *The Great Gatsby* and writes “I can’t believe he said that!” Jane Doe is on page 130 and writes “Oh no!” John can see that Jane left a note on page 130 and can choose to read it or wait until he’s caught up.  
-
-**Problem Statement:**  
-Readers want a way to track reading and share reactions without committing to a full social network.  
-
-**Target Users:**  
-People who like to track their reading progress and share thoughts selectively with friends.  
+- Full-stack architecture using **Next.js (React)**, **Node.js (Express)**, and **MySQL**
+- Add new books and details to the database
+- View all books in a clean, sortable table view
+- Update book information (e.g., title, author, status)
+- Delete books once finished reading
 
 ---
 
-## Feature Breakdown  
+## Planned Features (Future Roadmap)
 
-### MVP Features  
-Core CRUD functionality for the first sprints:
-- User login  
-- Add books to shelf  
-- Add notes to books  
-- Update bookmark  
-- Filter notes by person or page  
-
-### Extended Features  
-Planned for later development:
-- Friend requests and management  
-- Custom shelves (e.g., Sci-Fi, Nonfiction)  
-- Personalized interface (themes, decorations, color schemes)  
+- User accounts with authentication and login
+- Personal and shared notes for each book
+- Bookmarks to track reading progress
+- Interactive bookshelf UI
+- Custom filtering for notes:
+  - By user (self/friends)
+  - By page number
+- Friend requests and shared reading lists
+- Custom shelves (e.g., Sci-Fi, Nonfiction, Favorites)
+- User personalization (themes, colors, shelf decorations)
+- Social features like comments and book recommendations
 
 ---
 
-## Data Model Planning  
+## Environment Variables
 
-**Core Entities:**  
-- Users  
-- Shelves  
-- Books  
-- Bookmark  
-- Notes  
+### Frontend (`.env.local`)
+Create a `.env.local` file in the `client` folder based on the provided `example.env.local`:
 
-**Key Relationships:**  
-- Each user has one or more shelves  
-- Each user can have friends  
-- Each shelf contains books  
-- Each book can have a bookmark and multiple notes  
+```
+NEXT_PUBLIC_API_BASE_URL=http://<YOUR_VM_IP or localhost>:3000
+```
 
-**CRUD Operations:**  
-- Create books  
-- Create + Update bookmarks  
-- Full CRUD for notes  
+### Backend (`.env`)
+Create a `.env` file in the `server` folder based on the provided `example.env`:
 
----
+```
+SERVER_PORT=3000
 
-## User Experience  
-
-**User Flows:**  
-- Add a book to shelf  
-- Add and view notes  
-- Filter notes by friend or page  
-
-**Wireframes / Sketches:**  
-(Insert visuals or Figma link here)
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=ourshelves
+DB_USER=DevelopmentUserOrDeploymentUser
+DB_PASSWORD=UserPassword
+```
 
 ---
 
-# Development & Deployment
+## Development & Deployment
 
-## Local Development Setup  
+### Local Development Setup
 
-Add step by step instructions later  
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/f3liz/Our-Shelves.git
+   cd Our-Shelves
+   ```
 
-## Deployment Process
+2. **Install Dependencies**
+   ```bash
+   cd server
+   npm install
+   cd ../client
+   npm install
+   ```
 
-Add step by step instructions later with what it looks like and how it is setup with the script later
+3. **Set Up Environment Files**  
+   Create `.env` files for both frontend and backend (see above).
 
-# Environment Variables
+4. **Create a MySQL Database**
+   ```sql
+   CREATE DATABASE ourshelves;
+   ```
+   Ensure credentials match those in your backend `.env` file.
 
-Add a table with both the environment variables for the frontend and backend later
+5. **Start Both Servers**
+   From the project root:
+   ```bash
+   npm run dev
+   ```
 
-# Running the Application
+---
 
-Add instructions for running the application on the VM later
+### Deployment (VM / Production)
 
-# Dependencies and Prerequisites
+1. **Run the Setup Script**
+   ```bash
+   bash setup.sh
+   ```
 
-Add the important tools and libraries for development later
+2. **Navigate into the Project**
+   ```bash
+   cd Our-Shelves
+   ```
+
+3. **Create Environment Files**  
+   The setup script creates MySQL users and credentials in `ourshelves_mysql_credentials`.  
+   Use those to populate your backend `.env` file.
+
+4. **Rebuild Frontend**
+   ```bash
+   cd client
+   npm run build
+   ```
+
+5. **Start with PM2**
+   ```bash
+   pm2 list
+   pm2 start ecosystem.config.js
+   pm2 save
+   pm2 list
+   ```
+
+---
+
+## Running the Application
+
+### Locally
+```bash
+npm run dev
+```
+
+### On the VM
+1. **Rebuild Frontend**
+   ```bash
+   cd client
+   npm run build
+   ```
+
+2. **Restart Services**
+   ```bash
+   cd ..
+   pm2 start ecosystem.config.js
+   pm2 save
+   pm2 list
+   ```
+
+---
+
+## Architecture Overview
+
+Our Shelves uses a standard three-tier architecture:
+
+- **Frontend (Client):** Built with Next.js and React to provide a responsive user interface.  
+- **Backend (Server):** Powered by Node.js and Express, serving RESTful API endpoints for data handling.  
+- **Database Layer:** Uses MySQL to store book records, managed through the Sequelize ORM.  
+- **Deployment:** PM2 is used to manage both frontend and backend processes in production for stability and automatic restarts.  
+
+This structure keeps the code organized and supports smooth communication between the client, server, and database layers.
+
+---
+
+## Folder Structure
+
+```
+Our-Shelves/
+├── client/               # Next.js frontend
+│   ├── src/              # Source folder for frontend
+│   │   ├── components/   # Reusable UI components
+│   │   ├── app/          # Next.js routes
+│   │   ├── styles/       # Global and modular CSS
+│   │   ├── utilities/    # Utility functions for pages
+│   └── public/           # Static assets
+│
+├── server/               # Express backend
+│   ├── model/            # Sequelize models (BookSchema)
+│   ├── routers/          # API router
+│   ├── controller/       # Business logic
+│   ├── db/               # Database creation and functions
+│   └── index.js          # Entry point
+│
+├── setup.sh              # VM deployment setup script
+├── ecosystem.config.js   # PM2 configuration
+└── README.md             # Project documentation
+```
+
+---
+
+## API Endpoints
+
+| Method | Endpoint        | Description              |
+|--------|-----------------|--------------------------|
+| GET    | `/books`        | Fetch all books          |
+| GET    | `/books/:id`    | Fetch a single book      |
+| POST   | `/books`        | Add a new book           |
+| PUT    | `/books/:id`    | Update a book            |
+| DELETE | `/books/:id`    | Delete a book            |
+
+---
+
+## Dependencies
+
+### Frontend
+- `next`
+- `react`
+- `react-dom`
+
+### Backend
+- `express`
+- `sequelize`
+- `mysql2`
+- `cors`
+- `dotenv`
+
+### Root
+- `pm2`
+
+---
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) (v18+)
+- [npm](https://www.npmjs.com/)
+- [MySQL](https://www.mysql.com/)
+- [Git](https://git-scm.com/)
+- [PM2](https://pm2.keymetrics.io/)
+- [OpenSSL](https://www.openssl.org/)
+
+---
